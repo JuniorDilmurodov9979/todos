@@ -1,0 +1,15 @@
+/* .form-wrapper {
+    display: flex;
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+} */
+@media only screen and (max-width: 650px) {
+    .js-form {
+        width: 90%!important;
+    }
+    .js-list {
+        width: 90%!important;
+    }
+}
