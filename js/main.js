@@ -2,6 +2,10 @@ const elForm = document.querySelector('.js-form');
 const elList = document.querySelector('.js-list');
 const elInput = document.querySelector('.js-input');
 const elAllBtn = document.querySelector('.js-btn-all');
+const elBtnPrimary = document.querySelector('.btn-primary');
+const elBtnSuccess = document.querySelector('.btn-success');
+const elBtnWarning = document.querySelector('.btn-warning');
+
 const elCompletedBTn = document.querySelector('.js-btn-completed');
 const elUncompletedBTn = document.querySelector('.js-btn-uncompleted');
 // const elForm = document.querySelector('.js-form');
@@ -54,13 +58,23 @@ elList.addEventListener('click', (evt) => {
 function add() {
     elAllBtn.textContent = todos.length;
     let completedBtn = todos.filter((item) => item.isCompleted == true);
-    console.log(completedBtn);
+    // console.log(completedBtn);
     elCompletedBTn.textContent = completedBtn.length;
     let uncompletedBtn = todos.filter((item) => item.isCompleted == false);
-    console.log(uncompletedBtn);
+    // console.log(uncompletedBtn);
     elUncompletedBTn.textContent = uncompletedBtn.length;
     
+    
 }
+elBtnPrimary.addEventListener('click',()=> {
+    renderTodos([...todos], elList);
+});
+elBtnSuccess.addEventListener('click',()=> {
+    renderTodos([...todos.filter((item) => item.isCompleted == true)],elList);
+});
+elBtnWarning.addEventListener('click',()=> {
+    renderTodos([...todos.filter((item) => item.isCompleted == false)],elList);
+});
 
 function renderTodos(array, node) {
     node.innerHTML = "";
@@ -70,7 +84,6 @@ function renderTodos(array, node) {
         let newInput = document.createElement('input');
         let newDeleteBtn = document.createElement('button');
         let newEditBtn = document.createElement('button');
-        add();
         
         newText.textContent = item.text;
         newInput.type = 'checkbox';
@@ -86,6 +99,8 @@ function renderTodos(array, node) {
         newDeleteBtn.setAttribute('class', 'btn btn-danger todo-deleted-btn');
         newEditBtn.setAttribute('class', 'btn btn-warning me-2 todo-edit-btn');
         newText.setAttribute('class', 'flex-grow-1 ')
+        
+        add();
         
         if(item.isCompleted) {
             newInput.checked = true;
