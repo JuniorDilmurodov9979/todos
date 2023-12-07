@@ -5,17 +5,27 @@ const elAllBtn = document.querySelector('.js-btn-all');
 const elBtnPrimary = document.querySelector('.btn-primary');
 const elBtnSuccess = document.querySelector('.btn-success');
 const elBtnWarning = document.querySelector('.btn-warning');
-
+const changeBg = document.querySelector('.js-dark');
 const elCompletedBTn = document.querySelector('.js-btn-completed');
 const elUncompletedBTn = document.querySelector('.js-btn-uncompleted');
 // const elForm = document.querySelector('.js-form');
 // const elForm = document.querySelector('.js-form');
 const todos = [];
 
+let localTodos = localStorage.setItem('todos', todos);
+
+
+
+
+
 elForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     let inputValue = elInput.value;
     elInput.value = '';
+    if(inputValue.trim() == '') {
+        alert('Please enter something') 
+        return
+    }
     todos.push({
         id:todos.length ? todos.at(-1).id + 1 : 1,
         text: inputValue,
@@ -109,7 +119,9 @@ function renderTodos(array, node) {
         
         newItem.append(newInput, newText, newEditBtn, newDeleteBtn);
         node.appendChild(newItem); 
-        
     })
-    
 }
+
+changeBg.addEventListener('click', ()=> {
+    document.body.style.backgroundColor = 'black';   
+})
